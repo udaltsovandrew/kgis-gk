@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+  <title>Редактор</title>
+
+  <!-- Settings: Выбор сервера-->
+  <script src="js/app/server.js"></script>
+
+  <!-- ArcGIS -->
+  <link rel="stylesheet" href="http://js.arcgis.com/3.16/dijit/themes/claro/claro.css">
+  <link rel="stylesheet" href="http://js.arcgis.com/3.16/esri/css/esri.css">
+
+  <!-- Pouch DB -->
+  <script type="text/javascript" src="js/vendors/pouchdb/pouchdb-5.1.0.min.js"></script>
+  <script type="text/javascript" src="js/vendors/pouchdb/pouchdb.upsert.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/theme.css"/>
+  <script src="js/vendors/jquery/jquery-1.11.3.min.js"></script>
+  <script src="js/vendors/bootstrap/bootstrap.min.js"></script>
+
+  <link href="js/vendors/kendo/kendo.common.min.css" rel="stylesheet"/>
+  <link href="js/vendors/kendo/kendo.custom.css" rel="stylesheet"/>
+  <script src="js/vendors/kendo/kendo.all.min.js"></script>
+  <script src="js/vendors/kendo/jszip.min.js"></script>
+  <script src="js/vendors/kendo/kendo.custom.js"></script>
+  <script src="js/vendors/kendo/kendo.messages.ru-RU.js"></script>
+
+  <!-- Map CSS -->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <!-- Forms -->
+  <link type="text/css" href="js/vendors/alpaca/alpaca.min.css" rel="stylesheet"/>
+  <script type="text/javascript" src="js/vendors/handlebars/handlebars.js"></script>
+  <script type="text/javascript" src="js/vendors/alpaca/alpaca.min.js"></script>
+  <script src="js/vendors/moment/moment-with-locales.min.js"></script>
+  <script src="js/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" media="screen" href="js/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.css"/>
+
+  <!-- GPX, GeoJSON, KML -->
+  <!--
+  <script src="js/vendors/mapbox/toGeoJSON.js"></script>
+  <script src="js/vendors/mapbox/toKML.js"></script>
+  -->
+
+  <!-- Terraformer -->
+  <!--
+  <script src="js/vendors/terraformer/terraformer.js"></script>
+  <script src="js/vendors/terraformer/terraformer-arcgis-parse.js"></script>
+  -->
+
+  <!-- FileSaver -->
+  <script src="js/vendors/filesaver/filesaver.js"></script>
+
+  <!-- ArcGIS -->
+  <script src="http://js.arcgis.com/3.16/"></script>
+
+  <!-- Application -->
+  <script src="js/app/app-compiled.js"></script>
+
+</head>
+
+<body class="">
+
+<!-- Login -->
+<div id="login-container">
+  <div class="">
+    <div class="input-group input-group-lg">
+      <input type="text" class="form-control" id="username" placeholder="Пользователь" value="test">
+    </div>
+    <div class="input-group input-group-lg">
+      <input type="password" class="form-control" id="password" placeholder="Пароль" value="1">
+    </div>
+  </div>
+  <br/>
+  <div class="input-group input-group-lg">
+    <div type="button" class="btn btn-primary" id="login" tabindex="0">Вход</div>
+  </div>
+</div>
+
+<!-- Top Menu -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <ul class="nav navbar-nav">
+    <li id="GROUP.account" style="display:none;"class="dropdown" id="accounts">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+        class="glyphicon glyphicon-user"></span></a>
+      <ul class="dropdown-menu" id="adminDropdown">
+        <li><a href="#" id="account-settings">Параметры аккаунта</a></li>
+        <li><a href="#" id="accounts-manage">Список пользователей</a></li>
+        <li><a href="#" id="session-manage">Пользовательские сессии</a></li>
+      </ul>
+    </li>
+    <li class="dropdown" id="basemapList">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span></a>
+      <ul class="dropdown-menu" id="basemapDropdown">
+        <li><a href="#">Космоснимки</a></li>
+        <li><a href="#">Open Street Map</a></li>
+        <li><a href="#">Векторная карта</a></li>
+      </ul>
+    </li>
+    <li id="GROUP.tools">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-th-large"></span></a>
+      <ul class="dropdown-menu" id="registryDropdown">
+        <li><a id="window-layers">Слои</a></li>
+      </ul>
+    </li>
+
+    <li id="GROUP.location">
+      <div id="locateButton" class=""></div>
+    </li>
+    <li id="GROUP.search" class="">
+      <div class="search-widget">
+        <div id="searchField"></div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Bootstrap-map-js -->
+<div id="mapDiv"></div>
+
+<!-- Панель редактирования -->
+<div id="editor-container" style="display: none" class="">
+  <div id="editorDiv"></div>
+  <div class="pre-scrollable">
+    <div id="templateDiv"></div>
+  </div>
+</div>
+
+<!-- Панель слоев -->
+<div id="layers-container">
+  <div class id="layersDiv"></div>
+</div>
+
+<!-- Надземный объект -->
+<div class="panel panel-default" id="SurfaceFacility">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#SurfaceFacility-Attributes" data-toggle="tab">Свойства</a></li>
+    <li><a href="#SurfaceFacility-Document" style="display: none" data-toggle="tab">Документы</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane clear-padding active pre-scrollable" id="SurfaceFacility-Attributes"></div>
+    <div class="tab-pane clear-padding" id="SurfaceFacility-Document">
+      <div class="buttons-menu">
+        <div class="demo-section k-content" id="addSurfaceFacilityDocument"></div>
+        <div id="editSurfaceFacilityDocument" class="btn btn-success"><span
+          class="glyphicon glyphicon-pencil"></span>
+        </div>
+        <div id="deleteSurfaceFacilityDocument" class="btn btn-danger"><span
+          class="glyphicon glyphicon-trash"></span>
+        </div>
+      </div>
+      <div id="SurfaceFacility-Document-List" class=""></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Здание -->
+<div class="panel panel-default" id="Building">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#Building-Attributes" data-toggle="tab">Свойства</a></li>
+    <li><a href="#Building-Document" data-toggle="tab" style="display: none">Документы</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane clear-padding active pre-scrollable" id="Building-Attributes"></div>
+    <div class="tab-pane clear-padding" id="Building-Document">
+      <div class="buttons-menu">
+        <div class="demo-section k-content" id="addBuildingDocument"></div>
+        <div id="editBuildingDocument" class="btn btn-success"><span
+          class="glyphicon glyphicon-pencil"></span>
+        </div>
+        <div id="deleteBuildingDocument" class="btn btn-danger"><span
+          class="glyphicon glyphicon-trash"></span>
+        </div>
+      </div>
+      <div id="Building-Document-List" class=""></div>
+    </div>
+  </div>
+</div>
+
+<!-- ЖД -->
+<div class="panel panel-default" id="Railroad">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#Railroad-Attributes" data-toggle="tab">Свойства</a></li>
+    <li><a href="#Railroad-Document" data-toggle="tab" style="display: none">Документы</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane clear-padding active pre-scrollable" id="Railroad-Attributes"></div>
+    <div class="tab-pane clear-padding" id="Railroad-Document">
+      <div class="buttons-menu">
+        <div class="demo-section k-content" id="addRailroadDocument"></div>
+        <div id="editRailroadDocument" class="btn btn-success"><span
+          class="glyphicon glyphicon-pencil"></span>
+        </div>
+        <div id="deleteRailroadDocument" class="btn btn-danger"><span
+          class="glyphicon glyphicon-trash"></span>
+        </div>
+      </div>
+      <div id="Railroad-Document-List" class=""></div>
+    </div>
+  </div>
+</div>
+
+<!-- Дорога -->
+<div class="panel panel-default" id="Road">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#Road-Attributes" data-toggle="tab">Свойства</a></li>
+    <li><a href="#Road-Document" data-toggle="tab" style="display: none">Документы</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane clear-padding active pre-scrollable" id="Road-Attributes"></div>
+    <div class="tab-pane clear-padding" id="Road-Document">
+      <div class="buttons-menu">
+        <div class="demo-section k-content" id="addRoadDocument"></div>
+        <div id="editRoadDocument" class="btn btn-success"><span
+          class="glyphicon glyphicon-pencil"></span>
+        </div>
+        <div id="deleteRoadDocument" class="btn btn-danger"><span
+          class="glyphicon glyphicon-trash"></span>
+        </div>
+      </div>
+      <div id="Road-Document-List" class=""></div>
+    </div>
+  </div>
+</div>
+
+<!-- Подземный объект -->
+<div class="panel panel-default" id="UndergroundFacility">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#UndergroundFacility-Attributes" data-toggle="tab">Свойства</a></li>
+    <li><a href="#UndergroundFacility-Document" data-toggle="tab" style="display: none">Документы</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane clear-padding active pre-scrollable" id="UndergroundFacility-Attributes"></div>
+    <div class="tab-pane clear-padding" id="UndergroundFacility-Document">
+      <div class="buttons-menu">
+        <div class="demo-section k-content" id="addUndergroundFacilityDocument"></div>
+        <div id="editUndergroundFacilityDocument" class="btn btn-success"><span
+          class="glyphicon glyphicon-pencil"></span>
+        </div>
+        <div id="deleteUndergroundFacilityDocument" class="btn btn-danger"><span
+          class="glyphicon glyphicon-trash"></span>
+        </div>
+      </div>
+      <div id="UndergroundFacility-Document-List" class=""></div>
+    </div>
+  </div>
+</div>
+
+<!-- Документ -->
+<div class="panel panel-default" id="Document">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#Document-Attributes" data-toggle="tab">Свойства</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane clear-padding active pre-scrollable" id="Document-Attributes"></div>
+  </div>
+</div>
+
+<!-- Масштабная линейка -->
+<div id="visibleScaleContainer">
+  <div id="visibleSlider">
+
+  </div>
+</div>
+
+<!-- Окно загрузки файла -->
+<div id="fileDownload">
+  <div id="fileDownload-content"></div>
+</div>
+
+<!-- Notify -->
+<div id="notifyDiv"></div>
+
+
+<script>
+  moment().format();
+  init();
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"version":3,"sources":["server.js"],"names":[],"mappings":";;;AAGA,IAAI,YAAY;AACd,UAAQ,iCAAR;CADE;AAGJ,IAAI,iBAAiB,SAAjB","file":"server-compiled.js","sourcesContent":["/**\n * Created by udaltsov on 23.08.16.\n */\nvar _services = {\n  config: \"http://srv-app.igit.spb.ru:3000\"\n};\nvar _currentServer = 'kgis_gk';"]}

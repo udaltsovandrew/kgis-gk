@@ -1,0 +1,464 @@
+@import "templatePicker.css";
+@import "search.css";
+@import "searchEngine.css";
+body {
+  padding-top: 0px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+#accounts-manage {
+  display: none;
+}
+#print-container {
+  display: none;
+}
+#list-container {
+  display: none;
+}
+#notifyDiv {
+  position: absolute;
+  top: 65px;
+  left: 10px;
+  max-height: 600px !important;
+  width: auto;
+  overflow: hidden;
+}
+#session-container {
+  display: none;
+}
+#session-manage {
+  display: none;
+}
+#sessionSchedulerDiv {
+  display: none;
+}
+#table-container {
+  display: none;
+}
+#gpx-container {
+  display: none;
+}
+#login-container {
+  display: none;
+}
+#tools-container {
+  display: none;
+}
+#accounts-window {
+  display: none;
+}
+#network-status-window {
+  display: none;
+}
+#Account {
+  display: none;
+}
+#Substation {
+  display: none;
+}
+#Joint {
+  display: none;
+}
+#PowerLine {
+  display: none;
+}
+#ACLineSegment {
+  display: none;
+}
+#Structure {
+  display: none;
+}
+#VoltageLevel {
+  display: none;
+}
+#ErpAddress {
+  display: none;
+}
+#PowerTransformer {
+  display: none;
+}
+#Switch {
+  display: none;
+}
+#SubstationMeasurementControl {
+  display: none;
+}
+#PowerTransformerMeasurementControl {
+  display: none;
+}
+#EnergyConsumer {
+  display: none;
+}
+#SACEvent {
+  display: none;
+}
+#SACEventList {
+  display: none;
+}
+#CustomerOrganisation {
+  display: none;
+}
+#CustomerErpPerson {
+  display: none;
+}
+#EnergySource {
+  display: none;
+}
+#Crew {
+  display: none;
+}
+#StorageFacility {
+  display: none;
+}
+#Vehicle {
+  display: none;
+}
+#Organisation {
+  display: none;
+}
+#ErpPerson {
+  display: none;
+}
+#Document {
+  display: none;
+}
+#GuardCrew {
+  display: none;
+}
+#PowerCircuit {
+  display: none;
+}
+#PsrList {
+  display: none;
+}
+#Message {
+  display: none;
+}
+#Building {
+  display: none;
+}
+#Road {
+  display: none;
+}
+#Railroad {
+  display: none;
+}
+#SurfaceFacility {
+  display: none;
+}
+#UndergroundFacility {
+  display: none;
+}
+#situationCenter-container {
+  display: none;
+}
+#Project {
+  display: none;
+}
+#project-container {
+  display: none;
+}
+#networkProject-container {
+  display: none;
+}
+#connection-root {
+  display: none;
+}
+#mappingGenerationPanel {
+  display: none;
+}
+#fileDownload {
+  display: none;
+}
+.clear-padding {
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+#bodyDiv{
+  overflow: hidden !important;
+}
+
+#mapDiv {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin:0;
+  overflow: hidden !important;
+}
+.claro .dijitToolbar {
+  border-bottom: 0px solid white;
+  background-color: white;
+  background-repeat: repeat-x;
+  background-image: -moz-linear-gradient(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: -o-linear-gradient(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: none;
+  padding: 2px 0 2px 4px;
+  zoom: 1;
+}
+/*
+.templatePicker {
+  border: 0px solid #7EABCD !important;
+  padding: 0px;
+  -o-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  overflow-y: scroll;;
+}
+
+
+
+.esriAttributeInspector .atiLabel {
+  margin: 0px;
+  padding-right: 0px;
+  color: black;
+}
+
+.esriPopup .contentPane {
+  position: relative;
+  max-height: 300px;
+  overflow: auto;
+  padding: 5px 5px 5px 5px;
+  background-color: #FFFFFF;
+  color: #000000;
+}
+*/
+.searchExpandContainer {
+  width: 282px !important;
+}
+.panel-heading {
+  padding: 10px 15px;
+  border-bottom: 0px solid transparent;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 0px solid transparent;
+  border-radius: 0px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.strikeout {
+  text-decoration: line-through;
+  color: red;
+}
+.pre-scrollable {
+  min-height: 400px;
+  max-height: 700px;
+}
+.buttons-menu {
+  padding-bottom: 10px;
+}
+.esriLayerList .esriContainer {
+  background-color: #f8f8f8;
+  border: none;
+  color: #6e6e6e;
+}
+.esriLayerList .esriList {
+  background-color: #ededed;
+  border-top: 0px solid #e0e0e0;
+}
+.esriLayerList .esriList .esriContainer {
+  background-color: #f8f8f8;
+  color: #6e6e6e;
+}
+.esriLayerList .esriScaleInvisible .esriLabel {
+  color: #c3c3c3;
+}
+.esriLayerList .esriLabel {
+  display: block;
+  padding: 10px 20px 10px 32px;
+  margin: 0;
+  word-wrap: break-word;
+  font-weight: 300;
+}
+.esriLayerList .esriTitle {
+  border-bottom: 0px solid #e0e0e0;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #ffffff;
+  color: #555;
+}
+.esriLayerList .esriTitle .esriTitleContainer {
+  margin: 0;
+  border: 0px solid #ccc;
+}
+.esriLayerList .esriTitle .esriTitleContainer .esriCheckbox {
+  float: left;
+  /* height: 16px; */
+  /* width: 16px; */
+  padding: 0;
+  margin: 12px 5px 12px 10px;
+}
+.substationEnergyCenterReport {
+  background: #fafafa;
+  box-shadow: 0 0 2em #b8bcc3;
+  padding: 30px 60px;
+  min-height: 900px;
+}
+.substationEnergyCenterReport .lenenergo-logo {
+  background: url(../images/logotype.png);
+  background-size: 100% 100%;
+  display: block;
+  width: 390px;
+  height: 90px;
+  margin: 0px;
+  padding: 0px;
+}
+.substationEnergyCenterReport .substationEnergyCenterReport-category {
+  padding-top: 100px;
+}
+.substationEnergyCenterReport .substationEnergyCenterReport-substationName {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: 700;
+}
+.substationEnergyCenterReport .substationEnergyCenterReport-row {
+  margin-right: 80px;
+  border-bottom: 2px solid rgba(152, 152, 152, 0.39);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 110%;
+}
+.substationEnergyCenterReport .substationEnergyCenterReport-reconstruction {
+  display: none;
+}
+.substationEnergyCenterReport .substationEnergyCenterReport-footer {
+  position: absolute;
+  bottom: 30px;
+}
+.LocateButton span {
+  display: none;
+}
+.LocateButton .zoomLocateButton {
+  padding: 0px;
+  position: relative;
+  display: flex;
+  float: left;
+  width: 50px;
+  height: 50px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+  color: #c9c9c9;
+  background: #1465a6 url(../images/locate.png) no-repeat center center;
+}
+.LocateButton .zoomLocateButton:hover {
+  color: white;
+  background-color: #333;
+  background-color: #1465a6;
+}
+.LocateButton .zoomLocateButton:active {
+  color: white;
+  background-color: #ccc;
+  background-color: #1465a6;
+}
+.LocateButton .loading {
+  background-image: url(../images/locate-spinner.gif);
+}
+.LocateButton .tracking {
+  background-image: url(../images/stop.png) !important;
+}
+.logo {
+  background: url(../images/logo.png) no-repeat;
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  top: 8px;
+  left: 8px;
+  position: relative;
+}
+div.k-window-content {
+  position: relative;
+  height: 100%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  overflow: hidden;
+  outline: 0;
+}
+.k-grid .k-edit-cell > input[type="text"] {
+  padding: 0 .3em;
+  white-space: nowrap;
+  background-color: #2196f3 !important;
+  font-size: 13px;
+}
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.inputfile + label {
+  font-size: 1.25em;
+  font-weight: 300;
+  color: white;
+  background-color: #2196f3;
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.5em;
+}
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: #2196f3;
+}
+/*
+*Стиль для кнопки сохранения в формате KML
+*/
+.imageDownloadKML {
+  color: white;
+  background: url(../images/kml.png) no-repeat;
+  background-size: inherit;
+  margin-left: 9px;
+  height: 19px;
+  padding: 8px 16px 6px 10px;
+}
+.btnKMLGeometry{
+  width: 86px;
+    margin-left: 4px;
+}
+
+/*
+*Стиль для кнопки сохранения в формате JSON
+*/
+.imageDownloadGeoJSON {
+  color: white;
+  background: url(../images/json-file.png) no-repeat;
+  background-size: inherit;
+  margin-left: 9px;
+  height: 19px;
+  padding: 8px 16px 6px 10px;
+}
+/*
+*для таблицы координат
+*/
+.styleTableCoords{
+  left: 13px;
+  width: 468px;
+}
+.styleTextPropertyGeometry{
+  font-size: medium;
+  color: #5377ff;
+}
+
+
+
+
+
